@@ -39,18 +39,12 @@ public class AddEmployeeCmd {
         outputStream.write(Command.header);
         outputStream.write(getSize());
         outputStream.write(commandChar);
-        outputStream.write(name.getBytes());
-        outputStream.write(0x00);
-        outputStream.write(address.getBytes());
-        outputStream.write(0x00);
-        outputStream.write(city.getBytes());
-        outputStream.write(0x00);
-        outputStream.write(state.getBytes());
-        outputStream.write(0x00);
-        outputStream.write(yearlySalary.getBytes());
-        outputStream.write(0x00);
+        Command.writeField(outputStream, name);
+        Command.writeField(outputStream, address);
+        Command.writeField(outputStream, city);
+        Command.writeField(outputStream, state);
+        Command.writeField(outputStream, yearlySalary);
         outputStream.write(Command.footer);
     }
-
 }
 

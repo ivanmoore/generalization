@@ -7,6 +7,7 @@
  * Code Style | Class Templates options (Tools | IDE Options).
  */
 
+import java.io.IOException;
 import java.io.OutputStream;
 
 public class LoginCommand {
@@ -30,10 +31,8 @@ public class LoginCommand {
         outputStream.write(Command.header);
         outputStream.write(getSize());
         outputStream.write(commandChar);
-        outputStream.write(userName.getBytes());
-        outputStream.write(0x00);
-        outputStream.write(passwd.getBytes());
-        outputStream.write(0x00);
+        Command.writeField(outputStream, userName);
+        Command.writeField(outputStream, passwd);
         outputStream.write(Command.footer);
     }
 }
