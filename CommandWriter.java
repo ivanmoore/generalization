@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
 public class CommandWriter {
     public static final byte[] header = {(byte)0xde, (byte)0xad};
@@ -10,5 +11,23 @@ public class CommandWriter {
     public static void writeField(OutputStream outputStream, String name) throws IOException {
         outputStream.write(name.getBytes());
         outputStream.write(0x00);
+    }
+
+    static int getSize(List<String> fields) {
+        int size = header.length + SIZE_LENGTH + CMD_BYTE_LENGTH + footer.length;
+        for (String field : fields) {
+            size = size + field.getBytes().length + 1;
+        }
+        return size;
+    }
+
+    static void m(OutputStream outputStream, byte[] commandChar, List<String> fields) throws IOException {
+        outputStream.write(header);
+        outputStream.write(getSize(fields));
+        outputStream.write(commandChar);
+        for (String field : fields) {
+            writeField(outputStream, field);
+        }
+        outputStream.write(footer);
     }
 }

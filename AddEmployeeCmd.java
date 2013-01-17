@@ -13,16 +13,7 @@ import java.util.List;
 
 public class AddEmployeeCmd {
     private static final byte[] commandChar = {0x02};
-
-    List<String> fields = new ArrayList<String>();
-
-    private int getSize() {
-        int size = CommandWriter.header.length + CommandWriter.SIZE_LENGTH + CommandWriter.CMD_BYTE_LENGTH + CommandWriter.footer.length;
-        for (String field : fields) {
-            size = size + field.getBytes().length + 1;
-        }
-        return size;
-    }
+    private List<String> fields = new ArrayList<String>();
 
     public AddEmployeeCmd(String name, String address, String city, String state, int yearlySalary) {
         fields.add(name);
@@ -33,13 +24,7 @@ public class AddEmployeeCmd {
     }
 
     public void write(OutputStream outputStream) throws Exception {
-        outputStream.write(CommandWriter.header);
-        outputStream.write(getSize());
-        outputStream.write(commandChar);
-        for (String field : fields) {
-            CommandWriter.writeField(outputStream, field);
-        }
-        outputStream.write(CommandWriter.footer);
+        CommandWriter.m(outputStream, commandChar, fields);
     }
 }
 
