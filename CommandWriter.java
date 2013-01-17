@@ -21,7 +21,7 @@ public class CommandWriter {
         return size;
     }
 
-    static void m(OutputStream outputStream, byte[] commandChar, List<String> fields) throws IOException {
+    static void write(OutputStream outputStream, byte[] commandChar, List<String> fields) throws IOException {
         outputStream.write(header);
         outputStream.write(getSize(fields));
         outputStream.write(commandChar);

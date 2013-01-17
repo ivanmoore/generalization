@@ -21,22 +21,8 @@ public class LoginCommand {
         fields.add(passwd);
     }
 
-    private int getSize() {
-        int size = CommandWriter.header.length + CommandWriter.SIZE_LENGTH + CommandWriter.CMD_BYTE_LENGTH + CommandWriter.footer.length;
-        for (String field : fields) {
-            size = size + field.getBytes().length + 1;
-        }
-        return size;
-    }
-
     public void write(OutputStream outputStream) throws Exception {
-        outputStream.write(CommandWriter.header);
-        outputStream.write(getSize());
-        outputStream.write(commandChar);
-        for (String field : fields) {
-            CommandWriter.writeField(outputStream, field);
-        }
-        outputStream.write(CommandWriter.footer);
+        CommandWriter.write(outputStream, commandChar, fields);
     }
 }
 

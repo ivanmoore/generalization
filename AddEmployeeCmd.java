@@ -24,7 +24,7 @@ public class AddEmployeeCmd {
     }
 
     public void write(OutputStream outputStream) throws Exception {
-        CommandWriter.m(outputStream, commandChar, fields);
+        CommandWriter.write(outputStream, commandChar, fields);
     }
 }
 
