@@ -1,7 +1,7 @@
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class Command {
+public class CommandWriter {
     public static final byte[] header = {(byte)0xde, (byte)0xad};
     public static final byte[] footer = {(byte)0xbe, (byte)0xef};
     public static final int SIZE_LENGTH = 1;

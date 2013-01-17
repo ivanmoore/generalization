@@ -7,7 +7,6 @@
  * Code Style | Class Templates options (Tools | IDE Options).
  */
 
-import java.io.IOException;
 import java.io.OutputStream;
 
 public class LoginCommand {
@@ -22,18 +21,18 @@ public class LoginCommand {
     }
 
     private int getSize() {
-        return Command.header.length +  Command.SIZE_LENGTH +  Command.CMD_BYTE_LENGTH + Command.footer.length +
+        return CommandWriter.header.length +  CommandWriter.SIZE_LENGTH +  CommandWriter.CMD_BYTE_LENGTH + CommandWriter.footer.length +
                 userName.getBytes().length + 1 +
                 passwd.getBytes().length + 1;
     }
 
     public void write(OutputStream outputStream) throws Exception {
-        outputStream.write(Command.header);
+        outputStream.write(CommandWriter.header);
         outputStream.write(getSize());
         outputStream.write(commandChar);
-        Command.writeField(outputStream, userName);
-        Command.writeField(outputStream, passwd);
-        outputStream.write(Command.footer);
+        CommandWriter.writeField(outputStream, userName);
+        CommandWriter.writeField(outputStream, passwd);
+        outputStream.write(CommandWriter.footer);
     }
 }
 

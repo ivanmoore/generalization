@@ -19,7 +19,7 @@ public class AddEmployeeCmd {
     String yearlySalary;
 
     private int getSize() {
-        return Command.header.length +  Command.SIZE_LENGTH +  Command.CMD_BYTE_LENGTH + Command.footer.length +
+        return CommandWriter.header.length +  CommandWriter.SIZE_LENGTH +  CommandWriter.CMD_BYTE_LENGTH + CommandWriter.footer.length +
                 name.getBytes().length + 1 +
                 address.getBytes().length + 1 +
                 city.getBytes().length + 1 +
@@ -36,15 +36,15 @@ public class AddEmployeeCmd {
     }
 
     public void write(OutputStream outputStream) throws Exception {
-        outputStream.write(Command.header);
+        outputStream.write(CommandWriter.header);
         outputStream.write(getSize());
         outputStream.write(commandChar);
-        Command.writeField(outputStream, name);
-        Command.writeField(outputStream, address);
-        Command.writeField(outputStream, city);
-        Command.writeField(outputStream, state);
-        Command.writeField(outputStream, yearlySalary);
-        outputStream.write(Command.footer);
+        CommandWriter.writeField(outputStream, name);
+        CommandWriter.writeField(outputStream, address);
+        CommandWriter.writeField(outputStream, city);
+        CommandWriter.writeField(outputStream, state);
+        CommandWriter.writeField(outputStream, yearlySalary);
+        outputStream.write(CommandWriter.footer);
     }
 }
 
