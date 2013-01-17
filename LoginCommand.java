@@ -8,30 +8,34 @@
  */
 
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginCommand {
     public static final byte[] commandChar = {0x01};
 
-    private String userName;
-    private String passwd;
+    List<String> fields = new ArrayList<String>();
 
     public LoginCommand(String userName, String passwd) {
-        this.userName = userName;
-        this.passwd = passwd;
+        fields.add(userName);
+        fields.add(passwd);
     }
 
     private int getSize() {
-        return CommandWriter.header.length +  CommandWriter.SIZE_LENGTH +  CommandWriter.CMD_BYTE_LENGTH + CommandWriter.footer.length +
-                userName.getBytes().length + 1 +
-                passwd.getBytes().length + 1;
+        int size = CommandWriter.header.length + CommandWriter.SIZE_LENGTH + CommandWriter.CMD_BYTE_LENGTH + CommandWriter.footer.length;
+        for (String field : fields) {
+            size = size + field.getBytes().length + 1;
+        }
+        return size;
     }
 
     public void write(OutputStream outputStream) throws Exception {
         outputStream.write(CommandWriter.header);
         outputStream.write(getSize());
         outputStream.write(commandChar);
-        CommandWriter.writeField(outputStream, userName);
-        CommandWriter.writeField(outputStream, passwd);
+        for (String field : fields) {
+            CommandWriter.writeField(outputStream, field);
+        }
         outputStream.write(CommandWriter.footer);
     }
 }
