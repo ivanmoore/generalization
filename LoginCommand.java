@@ -13,8 +13,7 @@ import java.util.List;
 
 public class LoginCommand {
     public static final byte[] commandChar = {0x01};
-
-    List<String> fields = new ArrayList<String>();
+    private List<String> fields = new ArrayList<String>();
 
     public LoginCommand(String userName, String passwd) {
         fields.add(userName);
@@ -22,7 +21,7 @@ public class LoginCommand {
     }
 
     public void write(OutputStream outputStream) throws Exception {
-        CommandWriter.write(outputStream, commandChar, fields);
+        new CommandWriter(outputStream).write(commandChar, fields);
     }
 }
 

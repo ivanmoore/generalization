@@ -8,6 +8,12 @@ public class CommandWriter {
     public static final int SIZE_LENGTH = 1;
     public static final int CMD_BYTE_LENGTH = 1;
 
+    private final OutputStream outputStream;
+
+    public CommandWriter(OutputStream outputStream) {
+        this.outputStream = outputStream;
+    }
+
     public static void writeField(OutputStream outputStream, String name) throws IOException {
         outputStream.write(name.getBytes());
         outputStream.write(0x00);
@@ -21,7 +27,7 @@ public class CommandWriter {
         return size;
     }
 
-    static void write(OutputStream outputStream, byte[] commandChar, List<String> fields) throws IOException {
+    public void write(byte[] commandChar, List<String> fields) throws IOException {
         outputStream.write(header);
         outputStream.write(getSize(fields));
         outputStream.write(commandChar);
