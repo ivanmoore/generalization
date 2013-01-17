@@ -10,20 +10,16 @@
 import java.io.OutputStream;
 
 public class AddEmployeeCmd {
+    private static final byte[] commandChar = {0x02};
+
     String name;
     String address;
     String city;
     String state;
     String yearlySalary;
 
-    private static final byte[] header = {(byte)0xde, (byte)0xad};
-    private static final byte[] commandChar = {0x02};
-    private static final byte[] footer = {(byte)0xbe, (byte)0xef};
-    private static final int SIZE_LENGTH = 1;
-    private static final int CMD_BYTE_LENGTH = 1;
-
     private int getSize() {
-        return header.length +  SIZE_LENGTH +  CMD_BYTE_LENGTH + footer.length +
+        return Command.header.length +  Command.SIZE_LENGTH +  Command.CMD_BYTE_LENGTH + Command.footer.length +
                 name.getBytes().length + 1 +
                 address.getBytes().length + 1 +
                 city.getBytes().length + 1 +
@@ -40,7 +36,7 @@ public class AddEmployeeCmd {
     }
 
     public void write(OutputStream outputStream) throws Exception {
-        outputStream.write(header);
+        outputStream.write(Command.header);
         outputStream.write(getSize());
         outputStream.write(commandChar);
         outputStream.write(name.getBytes());
@@ -53,7 +49,7 @@ public class AddEmployeeCmd {
         outputStream.write(0x00);
         outputStream.write(yearlySalary.getBytes());
         outputStream.write(0x00);
-        outputStream.write(footer);
+        outputStream.write(Command.footer);
     }
 
 }
