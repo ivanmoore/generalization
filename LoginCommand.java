@@ -21,7 +21,7 @@ public class LoginCommand {
     }
 
     public void write(OutputStream outputStream) throws Exception {
-        new CommandWriter(outputStream).write(commandChar, fields);
+        new CommandWriter(outputStream, commandChar).write(fields);
     }
 }
 

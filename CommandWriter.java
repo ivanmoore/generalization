@@ -9,12 +9,14 @@ public class CommandWriter {
     public static final int CMD_BYTE_LENGTH = 1;
 
     private final OutputStream outputStream;
+    private final byte[] commandChar;
 
-    public CommandWriter(OutputStream outputStream) {
+    public CommandWriter(OutputStream outputStream, byte[] commandChar) {
         this.outputStream = outputStream;
+        this.commandChar = commandChar;
     }
 
-    public void write(byte[] commandChar, List<String> fields) throws IOException {
+    public void write(List<String> fields) throws IOException {
         outputStream.write(header);
         outputStream.write(getSize(fields));
         outputStream.write(commandChar);
