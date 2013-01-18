@@ -20,7 +20,7 @@ public class CommandWriter {
         fields.add(field);
     }
 
-    public void write(OutputStream outputStream) throws IOException {
+    public void writeOnto(OutputStream outputStream) throws IOException {
         outputStream.write(header);
         outputStream.write(getSize(fields));
         outputStream.write(commandChar);

@@ -8,8 +8,6 @@
  */
 
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 public class AddEmployeeCmd {
     private final CommandWriter commandWriter;
@@ -24,7 +22,7 @@ public class AddEmployeeCmd {
     }
 
     public void write(OutputStream outputStream) throws Exception {
-        commandWriter.write(outputStream);
+        commandWriter.writeOnto(outputStream);
     }
 }
 
