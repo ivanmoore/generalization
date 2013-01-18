@@ -13,11 +13,10 @@ import java.util.List;
 
 public class LoginCommand {
     public static final byte[] commandChar = {0x01};
-    private List<String> fields = new ArrayList<String>();
-    private CommandWriter commandWriter;
+    private final CommandWriter commandWriter;
 
     public LoginCommand(String userName, String passwd) {
-        commandWriter = new CommandWriter(commandChar, fields);
+        commandWriter = new CommandWriter(commandChar);
         commandWriter.add(userName);
         commandWriter.add(passwd);
     }

@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommandWriter {
@@ -9,11 +10,10 @@ public class CommandWriter {
     public static final int CMD_BYTE_LENGTH = 1;
 
     private final byte[] commandChar;
-    private final List<String> fields;
+    private final List<String> fields = new ArrayList<String>();
 
-    public CommandWriter(byte[] commandChar, List<String> fields) {
+    public CommandWriter(byte[] commandChar) {
         this.commandChar = commandChar;
-        this.fields = fields;
     }
 
     public void write(OutputStream outputStream) throws IOException {
