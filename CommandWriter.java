@@ -16,6 +16,10 @@ public class CommandWriter {
         this.commandChar = commandChar;
     }
 
+    public void add(String field) {
+        fields.add(field);
+    }
+
     public void write(OutputStream outputStream) throws IOException {
         outputStream.write(header);
         outputStream.write(getSize(fields));
@@ -37,9 +41,5 @@ public class CommandWriter {
             size = size + field.getBytes().length + 1;
         }
         return size;
-    }
-
-    public void add(String field) {
-        fields.add(field);
     }
 }
