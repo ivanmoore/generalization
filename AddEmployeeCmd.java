@@ -14,6 +14,7 @@ import java.util.List;
 public class AddEmployeeCmd {
     private static final byte[] commandChar = {0x02};
     private List<String> fields = new ArrayList<String>();
+    private CommandWriter commandWriter;
 
     public AddEmployeeCmd(String name, String address, String city, String state, int yearlySalary) {
         fields.add(name);
@@ -21,10 +22,11 @@ public class AddEmployeeCmd {
         fields.add(city);
         fields.add(state);
         fields.add(Integer.toString(yearlySalary));
+        commandWriter = new CommandWriter(commandChar, fields);
     }
 
     public void write(OutputStream outputStream) throws Exception {
-        new CommandWriter(commandChar, fields).write(outputStream);
+        commandWriter.write(outputStream);
     }
 }
 

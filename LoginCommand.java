@@ -14,14 +14,16 @@ import java.util.List;
 public class LoginCommand {
     public static final byte[] commandChar = {0x01};
     private List<String> fields = new ArrayList<String>();
+    private CommandWriter commandWriter;
 
     public LoginCommand(String userName, String passwd) {
         fields.add(userName);
         fields.add(passwd);
+        commandWriter = new CommandWriter(commandChar, fields);
     }
 
     public void write(OutputStream outputStream) throws Exception {
-        new CommandWriter(commandChar, fields).write(outputStream);
+        commandWriter.write(outputStream);
     }
 }
 
