@@ -17,12 +17,12 @@ public class AddEmployeeCmd {
     private CommandWriter commandWriter;
 
     public AddEmployeeCmd(String name, String address, String city, String state, int yearlySalary) {
-        fields.add(name);
-        fields.add(address);
-        fields.add(city);
-        fields.add(state);
-        fields.add(Integer.toString(yearlySalary));
         commandWriter = new CommandWriter(commandChar, fields);
+        commandWriter.add(name);
+        commandWriter.add(address);
+        commandWriter.add(city);
+        commandWriter.add(state);
+        commandWriter.add(Integer.toString(yearlySalary));
     }
 
     public void write(OutputStream outputStream) throws Exception {

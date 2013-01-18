@@ -17,9 +17,9 @@ public class LoginCommand {
     private CommandWriter commandWriter;
 
     public LoginCommand(String userName, String passwd) {
-        fields.add(userName);
-        fields.add(passwd);
         commandWriter = new CommandWriter(commandChar, fields);
+        commandWriter.add(userName);
+        commandWriter.add(passwd);
     }
 
     public void write(OutputStream outputStream) throws Exception {

@@ -38,4 +38,8 @@ public class CommandWriter {
         }
         return size;
     }
+
+    public void add(String field) {
+        fields.add(field);
+    }
 }
