@@ -12,8 +12,8 @@ public class CommandWriter {
     private final byte[] commandChar;
     private final List<String> fields = new ArrayList<String>();
 
-    public CommandWriter(byte[] commandChar) {
-        this.commandChar = commandChar;
+    public CommandWriter(byte commandChar) {
+        this.commandChar = new byte[]{commandChar};
     }
 
     public void add(String field) {
